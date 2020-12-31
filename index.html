@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="src/assets/css/basic.css">
+    <title>长通车检</title>
+    <!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/mobile-detect@1.4.4/mobile-detect.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+        /*
+         获取当前页面的路由地址信息 #/itemSelect 根据路由地址判断是否返回上一页或者退出软件
+        */
+        console.log(window.location.hash)
+         var first = null;
+	//监听手机返回键
+         document.addEventListener("plusready", function() {
+            var webview = plus.webview.currentWebview();
+            plus.key.addEventListener('backbutton', function () {
+              webview.canBack(function (e) {
+                if(window.location.hash == '#/itemSelect'){
+                    //首页按键，提示‘再按一次退出应用’
+                    if (!first) {
+                        first = new Date().getTime();
+                        plus.nativeUI.toast("再按一次退出应用", {
+                          duration: 'short'
+                        }); //通过H5+ API 调用Android 上的toast 提示框
+                        setTimeout(function() {
+                            first = null;
+                        }, 1000);
+                       } else {
+                            if (new Date().getTime() - first < 1000) { //获取第二次点击的时间戳, 两次之差 小于 1000ms 说明1s点击了两次,
+                                plus.runtime.quit(); //退出应用
+                            }
+                       }
+                         // 如果是上一页 也是登录的状态  返回上一页
+                    } else if (e.canBack && window.localStorage.getItem('token')) {
+                        webview.back();
+                    } else{
+                    	plus.runtime.quit();
+                    }
+                })
+            });
+        });
+    </script>
+
+  </body>
+</html>

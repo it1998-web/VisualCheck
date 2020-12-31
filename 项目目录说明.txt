@@ -1,0 +1,57 @@
+
+项目名称 ：VisualCheck
+
+ src 目录结构 =====>
+      1.assets 放置静态资源 css js icon字体图标 img图片.
+
+      2.components 用来放vue组件
+                {
+                  Login.vue           登录页
+	  Main.vue           主页（联网查询、唯一性检查、外观检验、底盘动态、路试检查、系统设置）
+
+	 =联网查询=
+                  WaitingList.vue     待检车辆列表
+                  TestResultList.vue  检测记录列表
+                  OnlineQuery.vue     联网查询
+
+	 =唯一性检查 =
+                  WaitingList.vue     待检车辆列表
+                  TestResultList.vue  检测记录列表
+                  Identification.vue  唯一性检查
+
+       =外观检验=
+                  LineSelect.vue      选择外检通道
+                  WaitingList.vue     待检车辆列表
+                  TestResultList.vue  检测记录列表
+                  TestMain.vue        外观检测主界面
+                  TakePhoto.vue       拍照
+                  Characteristic.vue  特征参数
+                  Appearance.vue      外观检查
+                  SafetyDevice.vue    安全装置
+
+	 =底盘动态=
+                  WaitingList.vue     待检车辆列表
+                  TestResultList.vue  检测记录列表
+                  DynamicChassis.vue    底盘动态
+
+ 	 =路试检查=
+                  WaitingList.vue     待检车辆列表
+                  TestResultList.vue  检测记录列表
+                  RoadTest.vue    路试检查主页
+
+                  RoadR1Test.vue    路试行车制动
+                  RoadR2Test.vue    路试坡道驻车
+                 }
+      3.router  用来放置路由
+                3.1 config 文件夹   存放封装的路由代码
+                      Utility.js   公共方法
+                      Business.js  检测业务
+                3.2 index.js 引入config文件夹中的.js文件 对路由进行统一的管理
+      4.App.vue 入口组件所有的页面都会被插入该组件中 它在插入index.html中，形成单页面应用.
+
+      5.main.js 入口文件 会影响到全局 可以在这里引入需要全局使用的库,组件，样式，方法等.
+static ====>
+       也可以存放静态资源与assets不同的是不会被webpack 编译 会直接被复制到最终打包目录 dist/static.
+
+
+
